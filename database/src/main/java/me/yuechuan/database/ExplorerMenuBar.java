@@ -9,6 +9,8 @@ import javax.swing.JMenuItem;
 
 public class ExplorerMenuBar extends JMenuBar 
 {	
+	private static final long serialVersionUID = 1L;
+
 	public ExplorerMenuBar(final Explorer editor) {
 		
 		

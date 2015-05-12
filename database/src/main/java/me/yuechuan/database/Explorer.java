@@ -6,25 +6,29 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
-import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 
 
 public class Explorer extends JPanel  {
-	
+
+	private static final long serialVersionUID = 1L;
 	private JSplitPane outsider;
-	private JTabbedPane tabbedPane;
-	private JPanel inputPanel;
+	private JPanel infoDisplayPanel;
+	private InstructInputPanel inputPanel;
 	private JFrame frame;
+	private JTable table;
 
 	
 	public Explorer() {
 		setLayout(new BorderLayout(2, 0));
 		
-		inputPanel = new JPanel();
-		tabbedPane = new JTabbedPane();
+		inputPanel = new InstructInputPanel();
+		infoDisplayPanel = new JPanel();
 		
+		outsider = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, infoDisplayPanel, inputPanel);
 		
-		outsider = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,inputPanel, tabbedPane);
+		table = new JTable();
+		infoDisplayPanel.add(table);
 		outsider.setOneTouchExpandable(true);
 		outsider.setDividerLocation(300);
 		outsider.setDividerSize(6);

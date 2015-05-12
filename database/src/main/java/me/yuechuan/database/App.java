@@ -8,8 +8,6 @@ public class App
 {
 	public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
-        
         try {
             // Set cross-platform Java L&F (also called "Metal")
         	UIManager.setLookAndFeel(
@@ -29,13 +27,14 @@ public class App
         	// handle exception
         }
         
-        
         Explorer explorer = new Explorer();
         explorer.createFrame(new ExplorerMenuBar(explorer)).setVisible(true);
         
+        DatabaseOperator dbo = new DatabaseOperator("jdbc:mysql://localhost/test", "", "");
         
-        //Editor editor = new Editor();
-        //editor.createFrame(new EditorMenuBar(editor)).setVisible(true);
+        dbo.connect();
+        dbo.showData();
+        dbo.close();
     }
 }
 
