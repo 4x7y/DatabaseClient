@@ -1,14 +1,41 @@
 package me.yuechuan.database;
 
-/**
- * Hello world!
- *
- */
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import me.yuechuan.database.ExplorerMenuBar;
+
 public class App 
 {
-    public static void main( String[] args )
+	public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
+        
+        try {
+            // Set cross-platform Java L&F (also called "Metal")
+        	UIManager.setLookAndFeel(
+            UIManager.getCrossPlatformLookAndFeelClassName());
+        	//UIManager.getLookAndFeel());
+        } 
+        catch (UnsupportedLookAndFeelException e) {
+        	// handle exception
+        }
+        catch (ClassNotFoundException e) {
+        	// handle exception
+        }
+        catch (InstantiationException e) {
+        	// handle exception
+        }
+        catch (IllegalAccessException e) {
+        	// handle exception
+        }
+        
+        
+        Explorer explorer = new Explorer();
+        explorer.createFrame(new ExplorerMenuBar(explorer)).setVisible(true);
+        
+        
+        //Editor editor = new Editor();
+        //editor.createFrame(new EditorMenuBar(editor)).setVisible(true);
     }
 }
 
