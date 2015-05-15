@@ -18,7 +18,17 @@ public class EvenOddRender implements TableCellRenderer {
 				DEFAULT_RENDERER.getTableCellRendererComponent(table, value,
 						isSelected, hasFocus, row, column);
 		Color foreground, background;
-
+		
+		foreground = Color.BLACK;
+		if(row%2 == 0) {
+			background = new Color(245,245,245);
+		}
+		else
+		{
+			background = new Color(255,255,255);
+		}
+		
+		/*
 		if (column==0) {
 			foreground = Color.WHITE;
 			if(row%2 == 0) {
@@ -32,6 +42,7 @@ public class EvenOddRender implements TableCellRenderer {
 			foreground = Color.BLACK;
 			background = Color.WHITE;
 		}
+		*/
 		renderer.setForeground(foreground);
 		renderer.setBackground(background);
 

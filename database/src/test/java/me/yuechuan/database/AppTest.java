@@ -22,9 +22,12 @@ public class AppTest extends TestCase {
     				username, password);
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
+            
+            System.out.println("Columns: " + resultSet.getMetaData().getColumnCount());
+            
             while (resultSet.next()) {
-            String tableName = resultSet.getString(1);
-            System.out.println("Table name : " + tableName);
+            	String tableName = resultSet.getString(1);
+            	System.out.println("Table name : " + tableName);
             }
             connection.close();
         } catch (ClassNotFoundException e) {

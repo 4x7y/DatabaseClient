@@ -97,7 +97,7 @@ public class InstructInputPanel extends JPanel
 	    firsetColumn.setMinWidth(80);
 	    
 	    this.add(table);
-	        
+	    
 		
 		// TODO Auto-generated constructor stub
 	}

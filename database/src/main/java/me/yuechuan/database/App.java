@@ -29,12 +29,6 @@ public class App
         
         Explorer explorer = new Explorer();
         explorer.createFrame(new ExplorerMenuBar(explorer)).setVisible(true);
-        
-        DatabaseOperator dbo = new DatabaseOperator("jdbc:mysql://localhost/test", "", "");
-        
-        dbo.connect();
-        dbo.showData();
-        dbo.close();
     }
 }
 
