@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.data.general.DefaultPieDataset;
@@ -51,9 +52,7 @@ public class StatisticInfoPanel extends JPanel {
 		dataType.setValue("谷歌", 245);
 		try {
 			DefaultPieDataset data = dataType;
-			// 生成普通饼状图除掉 3D 即可
-			// 生产3D饼状图
-			PiePlot3D plot = new PiePlot3D(data);
+			PiePlot plot = new PiePlot(data);
 			JFreeChart chart = new JFreeChart(
 					"用户使用的浏览器类型",            // 图形标题
 					JFreeChart.DEFAULT_TITLE_FONT, // 标题字体
