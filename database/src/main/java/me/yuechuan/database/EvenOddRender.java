@@ -28,21 +28,6 @@ public class EvenOddRender implements TableCellRenderer {
 			background = new Color(255,255,255);
 		}
 		
-		/*
-		if (column==0) {
-			foreground = Color.WHITE;
-			if(row%2 == 0) {
-				background = new Color(220,120,120);
-			}
-			else
-			{
-				background = new Color(200,100,100);
-			}
-		}  else {
-			foreground = Color.BLACK;
-			background = Color.WHITE;
-		}
-		*/
 		renderer.setForeground(foreground);
 		renderer.setBackground(background);
 

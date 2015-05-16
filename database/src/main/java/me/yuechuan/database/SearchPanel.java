@@ -11,6 +11,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -37,6 +38,12 @@ public class SearchPanel extends JPanel {
 	
 	private MouseListener searchBtnListener;
 	private MouseListener addBookListener;
+	private MouseListener changeBookListener;
+	private MouseListener deleteBookListener;
+	
+	private ResultSet resultset;
+	private int	columnNum;
+	private int rowNum;
 	
 	public SearchPanel(DatabaseOperator dbo) 
 	{
@@ -61,8 +68,10 @@ public class SearchPanel extends JPanel {
 		button.addMouseListener(addBookListener);
 		
 		JButton button_1 = new JButton("修改记录");
+		button_1.addMouseListener(changeBookListener);
 		
 		JButton button_2 = new JButton("删除记录");
+		button_2.addMouseListener(deleteBookListener);
 		
 		scrollPane = new JScrollPane();
 		GroupLayout gl_panel_1 = new GroupLayout(this);
@@ -118,9 +127,9 @@ public class SearchPanel extends JPanel {
 	public void updateSearchTable(ResultSet resultset)
 	{
 		try {
-			int columnNum = resultset.getMetaData().getColumnCount();
+			columnNum = resultset.getMetaData().getColumnCount();
 			resultset.last();
-			int rowNum = resultset.getRow();
+			rowNum = resultset.getRow();
 			resultset.first();
 			
 			rows = new Object[rowNum][columnNum];
@@ -187,15 +196,17 @@ public class SearchPanel extends JPanel {
 				
 				if(!bookName.isEmpty()) {
 					if(!isbn.isEmpty()) {
-						updateSearchTable(dbo.bookISBNandNameSearch(isbn, bookName));
+						resultset = dbo.bookISBNandNameSearch(isbn, bookName);
 					} else {
-						updateSearchTable(dbo.bookNameSearch(bookName));
+						resultset = dbo.bookNameSearch(bookName);
 					}
 				} else if(!isbn.isEmpty()) {
-					updateSearchTable(dbo.bookISBNSearch(isbn));
+					resultset = dbo.bookISBNSearch(isbn);
 				} else {
-					updateSearchTable(dbo.bookShow());
+					resultset = dbo.bookShow();
 				}
+				
+				updateSearchTable(resultset);
 			}
 
 			public void mousePressed(MouseEvent e) {
@@ -226,6 +237,80 @@ public class SearchPanel extends JPanel {
 				AddBookDialog dlg = new AddBookDialog(frame, "", dbo);
 				
 				dlg.setVisible(true);
+			}
+
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		};
+		
+		changeBookListener = new MouseListener() {
+
+			public void mouseClicked(MouseEvent e) {
+				int selectRow = table_1.getSelectedRow();
+				try {
+					resultset.absolute(selectRow + 1);
+					for (int i = 0; i < columnNum; i++) {
+						System.out.print(resultset.getString(i + 1));
+					}
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		};
+		
+		deleteBookListener = new MouseListener() {
+
+			public void mouseClicked(MouseEvent e) {
+				
+				int selectRow = table_1.getSelectedRow();
+				try {
+					resultset.absolute(selectRow + 1);
+					String isbn = resultset.getString("title_id");
+					System.out.print(resultset.getString("title_id"));
+					dbo.bookISBNDelete(isbn);
+				} catch (SQLException e1) {
+					JOptionPane.showConfirmDialog(null, e1.getMessage(), "Warning", JOptionPane.ERROR_MESSAGE);
+					e1.printStackTrace();
+				}
 			}
 
 			public void mousePressed(MouseEvent e) {

@@ -78,14 +78,14 @@ public class AddBookDialog extends JDialog {
 				if(!addNewBook(	textField.getText(), 
 								textField_1.getText(),
 								textField_3.getText(),
-								"",
+								"0",
 								textField_2.getText(),
 								textField_4.getText(),
 								textField_5.getText(),
-								"",
-								"",
-								"",
-								"")) {
+								"0",
+								"0",
+								"0",
+								"0")) {
 					JOptionPane.showConfirmDialog(null, "Can not add this book info!", "Warning",JOptionPane.ERROR_MESSAGE);
 				}
 			}

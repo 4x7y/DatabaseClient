@@ -10,10 +10,7 @@ import javax.swing.JOptionPane;
 
 public class DatabaseOperator 
 {
-	private String dbUrl;
 	private String query;
-	private String username;
-	private String password;
 	private String dbClass = "com.mysql.jdbc.Driver";
 	
 	private Connection connection;
@@ -33,9 +30,6 @@ public class DatabaseOperator
 	{
 		try {
 			connection = DriverManager.getConnection(dbUrl, username, password);
-			this.dbUrl = dbUrl;
-			this.username = username;
-			this.password = password;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
@@ -158,6 +152,77 @@ public class DatabaseOperator
 			e.printStackTrace();
 			return null;
 		} 
+	}
+	
+	public boolean bookUpdate(	String title_id_origin,
+								String title_id,
+								String title,
+								String type,
+								String pub_id,
+								String author,
+								String price,
+								String advance,
+								String royalty,
+								String ytd_sales,
+								String notes,
+								String pub_date)
+	{
+		try {
+			query = "update titles set "
+					+ "title_id = '" + title_id + "', "
+					+ "title = '" + title + "', "
+					+ "type = '" + type + "' "
+					+ "where "
+					+ "title_id = '" + title_id_origin +"';";
+
+			System.out.println(query);
+
+			statement = connection.createStatement();
+			statement.executeUpdate(query);
+
+			return true;
+		} catch (SQLException e) {
+			JOptionPane.showConfirmDialog(null, e.getMessage(), "Warning", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+			
+			return false;
+		} 
+	}
+	
+	public boolean bookNameDelete(String name)
+	{
+		query = "delete from titles where title = '" + name + "';";
+	
+		try {
+			System.out.println(query);
+    	
+			statement = connection.createStatement();
+			statement.executeUpdate(query);
+		
+			return true;
+		} catch (SQLException e) {
+			JOptionPane.showConfirmDialog(null, e.getMessage(), "Warning", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public boolean bookISBNDelete(String isbn)
+	{
+		query = "delete from titles where title_id = '" + isbn + "';";
+	
+		try {
+			System.out.println(query);
+    	
+			statement = connection.createStatement();
+			statement.executeUpdate(query);
+		
+			return true;
+		} catch (SQLException e) {
+			JOptionPane.showConfirmDialog(null, e.getMessage(), "Warning", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	public ResultSet getData()

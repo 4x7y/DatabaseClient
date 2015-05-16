@@ -31,6 +31,8 @@ public class Explorer extends JPanel  {
 	private JPasswordField passwordField_1;
 	
 	private SearchPanel searchPanel;
+	private RentInfoPanel rentInfoPanel;
+	private StatisticInfoPanel stInfoPanel;
 	
 	private DatabaseOperator dbo;
 	
@@ -185,11 +187,11 @@ public class Explorer extends JPanel  {
 		searchPanel = new SearchPanel(dbo);
 		tabbedPane.addTab("书籍查询", null, searchPanel, null);
 	
-		JPanel panel_2 = new JPanel();
-		tabbedPane.addTab("租借情况", null, panel_2, null);
+		rentInfoPanel = new RentInfoPanel();
+		tabbedPane.addTab("租借情况", null, rentInfoPanel, null);
 		
-		JPanel panel_3 = new JPanel();
-		tabbedPane.addTab("统计信息", null, panel_3, null);	
+		stInfoPanel = new StatisticInfoPanel();
+		tabbedPane.addTab("统计信息", null, stInfoPanel, null);	
 		
 	}
 	
